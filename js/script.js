@@ -22,7 +22,7 @@
         if (!current_hash || current_hash === 'company') {
           return
         } else {
-          $.getJSON('../store/' + current_hash + '.json', function (data) {
+          $.getJSON('./store/' + current_hash + '.json', function (data) {
             vue_data.data_all = data;
             vue_data.detail = vue_data.data_all.data_main[0];
             $('.navbar-inverse .navbar-nav>li').filter(function (v) {
