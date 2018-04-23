@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="msapplication-TileColor" content="#ff6600">
+  <meta name="theme-color" content="#ff6600">
+  <title>山东拼拼购集团</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./css/bootstrap3-3-7.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/swiper.4-2-0.min.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/fix.css">
+  <link rel="stylesheet" href="./css/t.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/jquery2-2-4.min.js"></script>
+  <script src="./js/bootstrap3-3-7.min.js" crossorigin="anonymous"></script>
+  <script src="./js/html5shiv.js"></script>
+  <script src="./js/vue2-4-0.min.js"></script>
+</head>
+
+<body>
+  <!-- 置顶图片 -->
+  <div class="container full">
+    <img id="ppg" src="./images/ppg_logo.jpg" alt="置顶图片">
+    <img class="top" src="./images/top.png" alt="置顶图片">
+  </div>
+  <!-- 超链接 -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a id="logo" class="navbar-brand" title="山东拼拼购">
+          <span>拼拼购</span>
+        </a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active static">
+            <a href="#">首页</a>
+          </li>
+          <li>
+            <a href="#about">关于我们</a>
+          </li>
+          <li>
+            <a href="#news">新闻中心</a>
+          </li>
+          <li>
+            <a href="#production">产品介绍</a>
+          </li>
+          <li>
+            <a href="#business">招商中心</a>
+          </li>
+          <li>
+            <a href="#humanresources">人力资源</a>
+          </li>
+          <li>
+            <a href="#culture">企业文化</a>
+          </li>
+          <li>
+            <a href="#concat">联系我们</a>
+          </li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+  <!-- 图片轮播 -->
+  <div class="container swiper_tag" style="padding: 0;">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="./images/swipper/head.png" alt="">
+        </div>
+        <div class="swiper-slide">
+          <img src="./images/swipper/tail.png" alt="">
+        </div>
+      </div>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
+
+      <!-- 如果需要导航按钮 -->
+      <!-- <div class="swiper-button-prev"></div> -->
+      <!-- <div class="swiper-button-next"></div> -->
+
+      <!-- 如果需要滚动条 -->
+      <!-- <div class="swiper-scrollbar"></div> -->
+    </div>
+  </div>
+
+  <!-- 二级条目 只在非主页展示 默认隐藏 -->
+  <div class="container hide" id="vue_control">
+    <div class="row" v-if="data_all">
+      <div class="col-md-3">
+        <header>
+          <h4>
+            <img v-bind:src=' "./icons/" + data_all.data_index + ".png" ' alt=""> {{ data_all.data_title }}
+          </h4>
+        </header>
+        <main>
+          <ul class="list-unstyled">
+            <li v-for="(item, index) in data_all.data_main">
+              <a @click.prevent="get_detail(index)" href="#" :title="item.title">{{ item.title }}</a>
+            </li>
+          </ul>
+        </main>
+      </div>
+      <div class="col-md-9 detail" v-if="detail">
+        <header>
+          <h4>{{ detail.title }}</h4>
+        </header>
+        <main>
+          <h3>{{ detail.main.head }}</h3>
+          <p
+          v-if="!detail.main.body[0].title"
+          class="col-md-10 col-md-offset-1"
+          :class="{fillled: item !== ''}"
+          v-for="(item , index) in detail.main.body">{{ item }}</p>
+          <ul class="clearfix" v-if="detail.main.body[0].title">
+            <li
+            @click="changeTab(index)"
+            class="col-md-8 col-md-offset-2 no-list"
+            :class="{'hide-tab': click_index !== index}"
+            v-for="(item , index) in detail.main.body">
+              <div class="">
+                <h4 class="common-transition">{{ item.title }}</h4>
+                <ul v-for="(item_, index_) in item.items" class="common-transition">
+                  <li class="bigger">{{ item_.title }}</li>
+                  <li v-for="(item__, index__) in item_.main">
+                    <span v-if="item__ !== 'map'" v-else>{{ item__ }}</span>
+                    <div v-else>
+                      <img @click="scale" class="scale" v-if="data_all.data_index === 6" src="./images/companymap.png" alt="">
+                      <img @click="scale" class="scale" v-if="data_all.data_index === 0" src="./images/constructure.png" alt="">
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- 二级条目 -->
+  <div class="container replacer">
+    <div class="row">
+      <div class="col-md-4">
+        <header id="company">
+          <h2>公司简介</h2>
+        </header>
+        <main>
+          <div class="company">
+            <img src="./images/company.png" alt="公司简介">
+          </div>
+          <div class="mask">
+            <ul class="list-unstyled company_detail">
+              <li>
+                山东拼拼购电子商务有限公司成立于2016年3月，注册资本人民币2000万元，坐落于美丽的泉城济南历城区工业南路101号拼拼购大厦，公司下辖电子商务公司、互联网软件公司、物流公司、餐饮公司等多家企业，于2016年底正式集团化运营，公司专注于互联网软件平台开发和运营。
+              </li>
+              <li>
+                山东拼拼购公司是中国战略新兴产业互联网领域的高新技术企业，其独创的C2E社交娱乐共享电商模式受到市场广泛青睐和一致好评，公司运用成熟稳健的操作模式，用诚信、专业、创新、共享、超越、共赢的精神服务与市场广大客户。
+              </li>
+              <li>
+                公司对社会遵纪守法，努力扩大企业影响力和市场号召力，为给市场提供更多的就业岗位而不懈努力，公司秉承以专业的知识和技能服务于企业和客户，为推动社会经济发展敬献绵薄之力。
+              </li>
+              <li>
+                山东拼拼购是全球第一家提出将互动社交、休闲娱乐、网络购物、共享经济和分享经济完美融合的企业，公司通过旗下互联网软件公司的开发能力和维护能力，以及对市场模式的不断探索和创新，使得公司C2E社交娱乐共享电商模式逐步走向成熟，并快速的崛起，同时开始影响着更多的线上线下企业。
+              </li>
+              <li>
+                山东拼拼购是一家有文化有胸怀的企业，以“做世界最优质的创新型互联网企业”为企业愿景，以“利益共享创造幸福生活”为企业使命，以“聚天下人、汇天下财、成天下事”为企业宗旨。以“创新、包容、灵活、分享”的企业精神专注于新型互联网创新模式的研发、运营和服务。
+              </li>
+              <li>
+                未来，山东拼拼购将加强新模式新功能的研发力度，扩大市场规模和影响力，不断的做强做大，并加快国际化步伐，以全球视野把“山东拼拼购”打造成正真意义的创新型互联网独角兽企业，努力成就全球卓越企业品牌。
+              </li>
+            </ul>
+          </div>
+        </main>
+      </div>
+      <div id="staff" class="col-md-8">
+        <header>
+          <h2>员工风采</h2>
+        </header>
+        <main class="">
+          <div class="side">
+            <ul class="list-unstyled">
+              <li>联谊活动</li>
+              <li>员工旅游</li>
+              <li class="active">户外拓展训练</li>
+            </ul>
+          </div>
+          <div class="staff-container">
+            <img src="./images/staff/2/0.png" alt="">
+            <img src="./images/staff/2/1.png" alt="">
+            <img src="./images/staff/2/2.png" alt="">
+            <img src="./images/staff/2/3.png" alt="">
+            <img src="./images/staff/2/4.png" alt="">
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- 二级条目 -->
+  <div class="container replacer">
+    <div class="row">
+      <div class="col-md-4">
+        <header>
+          <h2>视频专栏</h2>
+        </header>
+        <main>
+          <div class="company">
+            <video id="video_main" width="100%" autoplay="" loop="loop" controls="controls" poster="./images/posterimage.jpg">
+              <source src="http://admin.ppg666.com/ppgxunchuan.mp4" type="video/mp4"> 您的浏览器不支持 HTML5 video 标签。
+            </video>
+          </div>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#">Apple</a>
+            </li>
+            <li>
+              <a href="#">Apple</a>
+            </li>
+            <li>
+              <a href="#">Apple</a>
+            </li>
+            <li>
+              <a href="#">Apple</a>
+            </li>
+          </ul>
+        </main>
+      </div>
+      <div class="col-md-8">
+        <header>
+          <h2>产品介绍</h2>
+        </header>
+      </div>
+    </div>
+  </div>
+
+  <!-- 电话联系 -->
+  <div class="container phone replacer">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>400-067-1717 </h3>
+        <h5>周一至周日 8:00-18:00</h5>
+        <h5>（仅收市话费）</h5>
+      </div>
+    </div>
+  </div>
+
+  <!-- 端 下载 -->
+  <div class="container downlad replacer">
+    <div class="row" style="background-color: #fff;">
+      <div id="apple" class="col-md-4">
+        <div class="center">
+          <a href="#" title="iPhone端下载">
+            <img src="./icons/apple.png" alt="iPhone端下载"> iPhone下载
+          </a>
+        </div>
+      </div>
+      <div id="android" class="col-md-4">
+        <div class="center">
+          <a href="#" title="安卓端下载">
+            <img src="./icons/android.png" alt="安卓端下载"> 安卓下载
+          </a>
+        </div>
+      </div>
+      <div id="official-accounts" class="col-md-4">
+
+        <div class="center">
+          <a href="javascript:;" title="微信公众号">
+            <img src="./icons/weixin.png" alt="微信公众号"> 公众号
+            <div id="qrcode" class="common-transition">
+              <img src="./images/happy_ppgqrcode.jpg" alt="">
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 公司相关 -->
+  <div class="container company replacer">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="wrapper">
+          <img src="./images/1.png" alt="企业建设" />
+          <p class="title">企业建设</p>
+        </div>
+        <p class="desc">
+          牢固树立“以人为本，科学发展”思想，紧紧围绕公司核心目标开拓进取，坚决拥护公司政策、维护公司利益、紧跟公司步伐，在思想上、行动上同公司的发展方向和理念保持高度一致。
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="wrapper">
+          <img src="./images/2.png" alt="科技创新" />
+          <p class="title">科技创新</p>
+        </div>
+        <p class="desc">
+          坚持“科技支撑发展，创新引领未来”的指导思想，在全面开展跟随创新、集成创新的同时，大力做好原始创新，强化企业核心竞争力，为企业的稳健发展保驾护航。
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="wrapper">
+          <img src="./images/3.png" alt="文化品牌" />
+          <p class="title">文化品牌</p>
+        </div>
+
+        <p class="desc">
+          坚定企业文化自信，弘扬社会主义核心价值观，将《山东拼拼购信条》核心文化理念转化为员工的行为习惯，发挥文化凝聚、引领、激励、约束等作用，打造企业的文化软实力，以文化为重要依托，丰富品牌内涵，提升山东拼拼购品牌价值。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="">
+    <div class="links_all">
+      <p>
+        <a href="#company">集团介绍</a>
+        <a target="_blank" href="./law">法律声明</a>
+        <a href="./#concat">联系我们</a>
+        <a href="#concat">投诉建议</a>
+        <a href="">技术支持: 山东黑莓云信息科技有限公司</a>
+      </p>
+    </div>
+  </footer>
+  <!-- 遮盖层 -->
+  <div id="mask"></div>
+  <script src="./js/swiper4-2-0.min.js"></script>
+  <script src="./js/wall.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+
+
+</html>

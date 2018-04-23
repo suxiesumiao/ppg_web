@@ -1,0 +1,112 @@
+/* fix the style of boootstrap */
+
+.navbar-fixed-top {
+  position: static;
+  border-width: 0;
+  background-color: transparent;
+  top: auto;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
+  color: #ff6600;
+}
+
+/* 小屏幕右上角 */
+
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #ff6600;
+}
+
+.navbar-inverse .navbar-toggle {
+  border-color: #ff6600;
+}
+
+.navbar-toggle {
+  border-radius: 0;
+}
+
+.navbar-inverse .navbar-toggle:hover {
+  background-color: #d8d8d8;
+}
+
+.navbar-inverse {
+  border-color: transparent;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  background-color: #9a7d7d;
+}
+
+.navbar-inverse .navbar-nav>.active>a {
+  background-color: #ff6600;
+}
+
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover {
+  background-color: #ff6600;
+  transition: all .3s;
+}
+
+.navbar-inverse .navbar-brand {
+  border-bottom: 4px solid transparent;
+  transition: all .3s;
+}
+
+.navbar-inverse .navbar-brand:focus,
+.navbar-inverse .navbar-brand:hover {
+  color: #ff6600;
+  border-bottom: 4px solid #ff6600;
+}
+
+/* 响应式适配 */
+
+@media (max-width: 1024px) {
+  .navbar {
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1300px) {
+  .container {
+    width: 1270px;
+  }
+}
+
+/* 768 - all */
+
+@media (min-width: 768px) {
+  #logo {
+    font-size: 40px;
+    font-weight: 600;
+  }
+  .rad {
+    border-radius: 5px;
+  }
+  .navbar-inverse .navbar-nav>li>a {
+    min-width: 108px;
+    text-align: center;
+    color: #000;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}
+
+/* 768 - 1199 */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .navbar-header {
+    width: 100%;
+  }
+  #logo {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+/* swiper 轮播相关 */
+
+.swiper-container,
+.swiper-container img {
+  width: 100%;
+}

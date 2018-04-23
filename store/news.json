@@ -1,0 +1,23 @@
+{
+  "data_index": 1,
+  "data_title": "新闻中心",
+  "data_main": [{
+      "title": "行业新闻",
+      "main": {
+        "head": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
+      "title": "公司新闻",
+      "main": {
+        "head": "",
+        "body": [
+          ""
+        ]
+      }
+    }
+  ]
+}

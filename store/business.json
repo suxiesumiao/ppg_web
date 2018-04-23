@@ -1,0 +1,32 @@
+{
+  "data_index": 4,
+  "data_title": "招商中心",
+  "data_main": [{
+      "title": "合作要求",
+      "main": {
+        "head": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
+      "title": "联系人",
+      "main": {
+        "head": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
+      "title": "招商联系方式",
+      "main": {
+        "head": "",
+        "body": [
+          ""
+        ]
+      }
+    }
+  ]
+}

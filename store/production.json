@@ -1,0 +1,32 @@
+{
+  "data_index": 2,
+  "data_title": "产品介绍",
+  "data_main": [{
+      "title": "产品模式",
+      "main": {
+        "head": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
+      "title": "拼单流程",
+      "main": {
+        "head": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
+      "title": "产品理念",
+      "main": {
+        "head": "",
+        "body": [
+          ""
+        ]
+      }
+    }
+  ]
+}
