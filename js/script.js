@@ -82,7 +82,7 @@
       $('.replacer').hide();
       $('#vue_control').removeClass('hide')
       var aLink = $(this).attr('href').replace('#', '')
-      $.getJSON('../store/' + aLink + '.json', function (data) {
+      $.getJSON('./store/' + aLink + '.json', function (data) {
         vue_data.data_all = data;
         vue_data.detail = vue_data.data_all.data_main[0];
         vue_data.click_init();
